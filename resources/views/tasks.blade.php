@@ -56,15 +56,15 @@
                 Текущая задача
             </div>
 
-            <div class="panel-body position-absolute">
-                <!--<table class="table table-striped task-table">-->
+            <div class="panel-body position-absolute" id="block">
+               <div class="dragedBlock">
 
-
+                    <?php $order = 1; ?>
                     @foreach ($tasks as $task)
 
-                    <div  >
+                    <div onmousedown="drugOBJ(this,event)" class="unselectable  <?php echo 'class'.$order ?>" style="order:<?php echo $order++?>">
 
-                        <span>{{ $task->name }}</span>
+                        <span >{{ $task->name }}</span>
 
                         <div class="formBlock">
                                 <form action="{{ url('task/'.$task->id) }}" method="POST">
@@ -77,9 +77,9 @@
                                 </form>
                         </div>
                     </div>
-                    <br>
-                    @endforeach
 
+                    @endforeach
+               </div>
             </div>
         </div>
     @endif

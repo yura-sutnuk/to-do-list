@@ -11,21 +11,32 @@ function CheckRegisterData()
         return;
     }
     document.getElementById('Forma').submit();
-    /*var  req = new XMLHttpRequest();
-    req.onreadystatechange = function(){
-        if(req.readyState==4 && req.status==200)
-        {
+}
 
-            if(req.responseText != true)
+function drugOBJ(obj, e)
+{
+    function drug(e){
+        if(!stop) {
+            var cursorY = e.clientY;
+            var orderPos = Math.ceil((cursorY - elemY) / 54);
+            var elem = document.getElementsByClassName('class' + orderPos)[0];
+            if(elem === undefined)
             {
-                alert(req.responseText);
+                return;
             }
-
+            elem.style.order = obj.style.order;
+            elem.className = 'unselectable class'+ elem.style.order;
+            obj.style.order = orderPos;
+            obj.className = 'unselectable class' + obj.style.order;
         }
     }
-
-    req.open("POST","tryRegister",true );
-    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    req.send("login="+login+"&pass="+pass);*/
+    var stop = false;
+    var elemY = document.getElementById('block').getBoundingClientRect().top;
+    document.onmousemove = drug;
+    document.onmouseup = function(){
+        stop = true;
+        document.onmouseup='';
+        document.onmousemove='';
+    }
 
 }
